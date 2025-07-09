@@ -34,19 +34,15 @@ export default function HomePage() {
   const fetchStatsAndFeaturedStories = async () => {
     setIsLoading(true)
     try {
-      console.log('Fetching stats from /api/stats...')
       const response = await fetch('/api/stats')
-      console.log('Response status:', response.status)
       
       if (response.ok) {
         const data = await response.json()
-        console.log('Data received:', data)
         
         if (data.success) {
           setStats(data.stats)
           setFeaturedStories(data.featuredStories)
           setLastUpdated(new Date())
-          console.log('Stats updated:', data.stats)
         } else {
           console.error('API returned success: false', data)
         }
@@ -68,7 +64,10 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <BookOpen className="h-8 w-8 text-primary-600" />
-              <span className="ml-2 text-xl font-bold text-gray-900">Web Truyện</span>
+              <div className="ml-2">
+                <span className="text-xl font-bold text-gray-900">Web Truyện</span>
+                <div className="text-xs text-gray-500">by Dr. Ngọ Minh Tú</div>
+              </div>
             </div>
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
@@ -100,18 +99,32 @@ export default function HomePage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Chào mừng đến với Web Truyện
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl text-gray-600 mb-4">
             Khám phá thế giới văn học với hàng ngàn truyện hay
           </p>
+          
+          {/* Author & Dedication Info */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center space-x-2 mb-2">
+              <span className="text-blue-600 font-semibold">✨ Được phát triển bởi:</span>
+              <span className="text-purple-700 font-bold">Dr. Ngọ Minh Tú</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <span className="text-pink-600">💝 Dành tặng cho:</span>
+              <span className="text-red-600 font-bold">Nguyễn Thu Hà</span>
+              <span className="text-pink-500">💕</span>
+            </div>
+            <div className="mt-3 text-xs text-gray-500">
+              © 2025 - Được tạo với ❤️ và Next.js
+            </div>
+          </div>
+          
           <div className="flex justify-center space-x-4">
             <Link href="/stories" className="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors">
               Đọc truyện ngay
             </Link>
             <Link href="/admin" className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors">
               Thêm truyện mới
-            </Link>
-            <Link href="/test-reader" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
-              Test đọc truyện
             </Link>
           </div>
         </div>
@@ -243,12 +256,37 @@ export default function HomePage() {
               <BookOpen className="h-6 w-6 mr-2" />
               <span className="text-lg font-semibold">Web Truyện</span>
             </div>
-            <p className="text-gray-400">
+            <p className="text-gray-400 mb-4">
               Trang web đọc truyện với giao diện đẹp và dễ sử dụng
             </p>
+            
+            {/* Author & Copyright Info */}
+            <div className="border-t border-gray-700 pt-4">
+              <div className="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
+                <div className="flex items-center space-x-2">
+                  <span className="text-blue-400">👨‍💻 Phát triển bởi:</span>
+                  <span className="text-white font-semibold">Dr. Ngọ Minh Tú</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-pink-400">💝 Dành tặng:</span>
+                  <span className="text-pink-300 font-semibold">Nguyễn Thu Hà</span>
+                </div>
+              </div>
+              <div className="mt-2 text-xs text-gray-500">
+                © 2025 Web Truyện. Được tạo với ❤️ sử dụng Next.js & MongoDB
+              </div>
+            </div>
           </div>
         </div>
       </footer>
+      
+      {/* Watermark */}
+      <div className="fixed bottom-4 right-4 bg-white/80 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg border border-gray-200 z-50">
+        <div className="text-xs text-gray-600">
+          <div className="font-semibold text-blue-600">Dr. Ngọ Minh Tú</div>
+          <div className="text-pink-600">💝 For Nguyễn Thu Hà</div>
+        </div>
+      </div>
     </div>
   )
 }

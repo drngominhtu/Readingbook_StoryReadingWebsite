@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
-import { connectToDatabase } from '@/lib/mongodb'
+import connectDB from '@/lib/mongodb'
 import { Story, Chapter, Tag } from '@/models'
 
 export async function GET() {
   try {
-    await connectToDatabase()
+    await connectDB()
 
     // Get counts efficiently
     const [storiesCount, chaptersCount, tagsCount] = await Promise.all([
