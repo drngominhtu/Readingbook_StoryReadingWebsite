@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import AdminAuth from '@/components/AdminAuth'
 
 interface Story {
   _id: string
@@ -90,32 +91,40 @@ export default function StoryChaptersPage() {
     }
   }
 
+export default function ChapterManagementPage() {
+  // ... existing code ...
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Đang tải...</p>
+      <AdminAuth>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Đang tải...</p>
+          </div>
         </div>
-      </div>
+      </AdminAuth>
     )
   }
 
   if (!story) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy truyện</h1>
-          <Link href="/admin" className="text-blue-600 hover:text-blue-800">
-            ← Quay lại Admin
-          </Link>
+      <AdminAuth>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy truyện</h1>
+            <Link href="/admin" className="text-blue-600 hover:text-blue-800">
+              ← Quay lại Admin
+            </Link>
+          </div>
         </div>
-      </div>
+      </AdminAuth>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <AdminAuth>
+      <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -269,5 +278,6 @@ export default function StoryChaptersPage() {
         </div>
       )}
     </div>
+    </AdminAuth>
   )
 }

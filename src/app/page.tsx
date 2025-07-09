@@ -34,14 +34,25 @@ export default function HomePage() {
   const fetchStatsAndFeaturedStories = async () => {
     setIsLoading(true)
     try {
+      console.log('Fetching stats from /api/stats...')
       const response = await fetch('/api/stats')
+      console.log('Response status:', response.status)
+      
       if (response.ok) {
         const data = await response.json()
+        console.log('Data received:', data)
+        
         if (data.success) {
           setStats(data.stats)
           setFeaturedStories(data.featuredStories)
           setLastUpdated(new Date())
+          console.log('Stats updated:', data.stats)
+        } else {
+          console.error('API returned success: false', data)
         }
+      } else {
+        const errorText = await response.text()
+        console.error('Response not OK:', errorText)
       }
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -65,9 +76,6 @@ export default function HomePage() {
               </Link>
               <Link href="/stories" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
                 Truyện
-              </Link>
-              <Link href="/categories" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Thể loại
               </Link>
               <Link href="/admin" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
                 Quản lý

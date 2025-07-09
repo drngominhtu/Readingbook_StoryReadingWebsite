@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import AdminAuth from '@/components/AdminAuth'
 import { 
   Database, 
   Trash2, 
@@ -139,7 +140,8 @@ export default function DatabaseAdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <AdminAuth>
+      <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -387,5 +389,6 @@ export default function DatabaseAdminPage() {
         </div>
       </div>
     </div>
+    </AdminAuth>
   )
 }

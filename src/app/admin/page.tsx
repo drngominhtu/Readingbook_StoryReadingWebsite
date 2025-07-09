@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { BookOpen, Plus, Edit, Trash2, Eye, User } from 'lucide-react'
+import AdminAuth from '@/components/AdminAuth'
 
 interface Story {
   _id: string
@@ -168,7 +169,8 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <AdminAuth>
+      <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -547,5 +549,6 @@ export default function AdminPage() {
         </div>
       )}
     </div>
+    </AdminAuth>
   )
 }
