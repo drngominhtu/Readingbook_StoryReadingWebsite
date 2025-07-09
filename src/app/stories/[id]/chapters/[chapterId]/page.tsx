@@ -12,7 +12,8 @@ import {
   Settings,
   Moon,
   Sun,
-  Type
+  Type,
+  ChevronUp
 } from 'lucide-react'
 
 interface Story {
@@ -53,6 +54,16 @@ export default function ChapterReaderPage() {
   const [darkMode, setDarkMode] = useState(false)
   const [fontSize, setFontSize] = useState(16)
   const [showSettings, setShowSettings] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  // Scroll to top functionality
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     if (storyId && chapterId) {
@@ -115,6 +126,10 @@ export default function ChapterReaderPage() {
     const newSize = Math.max(12, Math.min(24, fontSize + delta))
     setFontSize(newSize)
     localStorage.setItem('fontSize', newSize.toString())
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   useEffect(() => {
@@ -409,6 +424,21 @@ export default function ChapterReaderPage() {
               </div>
             )}
           </div>
+        )}
+
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className={`fixed bottom-6 right-6 p-3 rounded-full shadow-lg transition-all duration-200 z-50 ${
+              darkMode 
+                ? 'bg-gray-700 hover:bg-gray-600 text-white' 
+                : 'bg-white hover:bg-gray-50 text-gray-700'
+            }`}
+            title="Lên đầu trang"
+          >
+            <ChevronUp className="h-5 w-5" />
+          </button>
         )}
       </main>
     </div>

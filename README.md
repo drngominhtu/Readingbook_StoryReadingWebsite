@@ -49,6 +49,51 @@ npm run dev
 
 Mở [http://localhost:3000](http://localhost:3000) để xem kết quả.
 
+## 🌐 Deploy lên Production
+
+### Deploy lên Vercel (Khuyến nghị)
+
+1. **Push code lên GitHub:**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/your-username/your-repo.git
+   git push -u origin main
+   ```
+
+2. **Deploy trên Vercel:**
+   - Vào [vercel.com](https://vercel.com)
+   - Đăng nhập bằng GitHub
+   - Import repository
+   - Thêm Environment Variable: `MONGODB_URI`
+   - Deploy!
+
+3. **Cấu hình MongoDB Atlas cho Production:**
+   - Vào Network Access
+   - Add IP: `0.0.0.0/0` (cho Vercel)
+
+### URL Demo
+- **Local**: http://localhost:3000
+- **Production**: https://your-project.vercel.app
+
+## 📱 Hướng dẫn sử dụng
+
+### Lần đầu sử dụng:
+1. **Tạo thể loại**: Truy cập `/admin/database` → "Tạo thể loại mẫu" (50 thể loại)
+2. **Thêm truyện**: Truy cập `/admin` → "Thêm truyện mới"
+3. **Thêm chương**: Click "Quản lý chương" → Thêm nội dung
+4. **Đọc truyện**: Truy cập `/stories` hoặc trang chủ
+
+### Các trang chính:
+- **Trang chủ**: `/` - Giới thiệu và điều hướng
+- **Danh sách truyện**: `/stories` - Xem tất cả truyện
+- **Đọc truyện**: `/stories/[id]/chapters/[chapterId]` - Đọc chương
+- **Admin**: `/admin` - Quản lý truyện và chương
+- **Database Admin**: `/admin/database` - Reset và tạo mẫu dữ liệu
+- **Test Reader**: `/test-reader` - Test tính năng đọc truyện
+
 ## 🎯 Cách sử dụng
 
 ### Thêm truyện mới

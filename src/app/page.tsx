@@ -55,6 +55,9 @@ export default function HomePage() {
             <Link href="/admin" className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors">
               Thêm truyện mới
             </Link>
+            <Link href="/test-reader" className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+              Test đọc truyện
+            </Link>
           </div>
         </div>
 

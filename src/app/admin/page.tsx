@@ -194,6 +194,13 @@ export default function AdminPage() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Quản lý truyện</h1>
           <div className="flex space-x-4">
+            <Link
+              href="/admin/database"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors flex items-center"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Quản lý Database
+            </Link>
             <button
               onClick={() => setShowTagForm(true)}
               className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center"

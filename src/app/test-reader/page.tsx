@@ -4,8 +4,17 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { BookOpen, Plus, Eye, FileText } from 'lucide-react'
 
+interface Story {
+  _id: string
+  title: string
+  author: string
+  description: string
+  chapterCount: number
+  viewCount: number
+}
+
 export default function ReaderTestPage() {
-  const [stories, setStories] = useState([])
+  const [stories, setStories] = useState<Story[]>([])
   const [loading, setLoading] = useState(false)
 
   const fetchStories = async () => {
