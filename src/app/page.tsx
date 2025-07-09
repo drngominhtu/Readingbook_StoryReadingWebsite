@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { BookOpen, Search, Plus, Home, User, RefreshCw } from 'lucide-react'
+import { BookOpen, RefreshCw } from 'lucide-react'
 
 interface Stats {
   stories: number
@@ -58,40 +58,6 @@ export default function HomePage() {
   }
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <BookOpen className="h-8 w-8 text-primary-600" />
-              <div className="ml-2">
-                <span className="text-xl font-bold text-gray-900">Web Truyện</span>
-                <div className="text-xs text-gray-500">by Dr. Ngọ Minh Tú</div>
-              </div>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Trang chủ
-              </Link>
-              <Link href="/stories" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Truyện
-              </Link>
-              <Link href="/admin" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Quản lý
-              </Link>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <button className="p-2 rounded-full hover:bg-gray-100" title="Tìm kiếm">
-                <Search className="h-5 w-5 text-gray-700" />
-              </button>
-              <button className="p-2 rounded-full hover:bg-gray-100" title="Tài khoản">
-                <User className="h-5 w-5 text-gray-700" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
@@ -153,7 +119,7 @@ export default function HomePage() {
             <span>{isLoading ? 'Đang tải...' : 'Cập nhật'}</span>
           </button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="bg-white rounded-lg shadow p-6 text-center">
             <BookOpen className="h-12 w-12 text-primary-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900">
@@ -169,15 +135,6 @@ export default function HomePage() {
               {isLoading ? '...' : stats.chapters}
             </h3>
             <p className="text-gray-600">Chương</p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6 text-center">
-            <div className="h-12 w-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-primary-600 font-bold">#</span>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900">
-              {isLoading ? '...' : stats.tags}
-            </h3>
-            <p className="text-gray-600">Thể loại</p>
           </div>
         </div>
 
@@ -235,17 +192,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Categories */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Thể loại</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {['Tiên hiệp', 'Huyền huyễn', 'Đô thị', 'Khoa học viễn tưởng', 'Lịch sử', 'Kinh dị'].map((category) => (
-              <Link key={category} href={`/categories/${category.toLowerCase().replace(/\s+/g, '-')}`} className="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition-shadow">
-                <span className="text-gray-800 font-medium">{category}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
+
       </main>
 
       {/* Footer */}

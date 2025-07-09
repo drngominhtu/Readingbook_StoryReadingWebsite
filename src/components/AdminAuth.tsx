@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Lock, Eye, EyeOff } from 'lucide-react'
+import { Lock, Eye, EyeOff, Home } from 'lucide-react'
+import Link from 'next/link'
 
 interface AdminAuthProps {
   children: React.ReactNode
@@ -132,12 +133,21 @@ export default function AdminAuth({ children }: AdminAuthProps) {
                 </div>
               )}
 
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                Đăng nhập
-              </button>
+              <div className="flex space-x-3">
+                <Link
+                  href="/"
+                  className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors text-center flex items-center justify-center"
+                >
+                  <Home className="h-4 w-4 mr-2" />
+                  Trang chủ
+                </Link>
+                <button
+                  type="submit"
+                  className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                >
+                  Đăng nhập
+                </button>
+              </div>
             </form>
 
             <div className="mt-6 text-center">

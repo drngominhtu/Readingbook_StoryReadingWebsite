@@ -105,31 +105,6 @@ export default function StoriesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <BookOpen className="h-8 w-8 text-primary-600" />
-              <Link href="/" className="ml-2 text-xl font-bold text-gray-900">
-                Web Truyện
-              </Link>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Trang chủ
-              </Link>
-              <Link href="/stories" className="text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Truyện
-              </Link>
-              <Link href="/admin" className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium">
-                Quản lý
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search and Filter */}
         <div className="mb-8">
@@ -152,6 +127,7 @@ export default function StoriesPage() {
                   value={selectedTag}
                   onChange={(e) => setSelectedTag(e.target.value)}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  title="Chọn thể loại"
                 >
                   <option value="">Tất cả thể loại</option>
                   {tags.map((tag) => (
@@ -164,6 +140,7 @@ export default function StoriesPage() {
                   value={selectedStatus}
                   onChange={(e) => setSelectedStatus(e.target.value)}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  title="Chọn trạng thái"
                 >
                   <option value="">Tất cả trạng thái</option>
                   <option value="ongoing">Đang ra</option>
@@ -245,7 +222,7 @@ export default function StoriesPage() {
                       <span
                         key={tag._id}
                         className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium text-white"
-                        style={{ backgroundColor: tag.color }}
+                        style={{ backgroundColor: tag.color } as React.CSSProperties}
                       >
                         {tag.name}
                       </span>
