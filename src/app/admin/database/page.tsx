@@ -80,6 +80,37 @@ export default function DatabaseAdminPage() {
     }
   }
 
+  const createSampleData = async () => {
+    setLoading(true)
+    setMessage('Đang tạo dữ liệu mẫu...')
+    
+    try {
+      const response = await fetch('/api/admin/create-sample-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (response.ok) {
+        const result = await response.json()
+        setMessage('✅ ' + result.message)
+        setStats({
+          stories: result.data.stories,
+          chapters: result.data.chapters,
+          tags: result.data.tags
+        })
+      } else {
+        const error = await response.json()
+        setMessage('❌ Lỗi: ' + (error.error || 'Không thể tạo dữ liệu mẫu'))
+      }
+    } catch (error) {
+      setMessage('❌ Lỗi kết nối: ' + (error instanceof Error ? error.message : 'Unknown error'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const getStats = async () => {
     setLoading(true)
     try {
@@ -158,7 +189,7 @@ export default function DatabaseAdminPage() {
         </div>
 
         {/* Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Get Stats */}
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center mb-4">
@@ -196,6 +227,26 @@ export default function DatabaseAdminPage() {
               className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
             >
               {loading ? 'Đang tạo...' : 'Tạo thể loại mẫu'}
+            </button>
+          </div>
+
+          {/* Create Sample Data */}
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center mb-4">
+              <BookOpen className="h-6 w-6 text-purple-600 mr-3" />
+              <h2 className="text-xl font-semibold text-gray-900">
+                Tạo dữ liệu mẫu
+              </h2>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Tạo 3 truyện mẫu với đầy đủ chương để test đọc truyện
+            </p>
+            <button
+              onClick={createSampleData}
+              disabled={loading}
+              className="w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 disabled:bg-gray-400 transition-colors"
+            >
+              {loading ? 'Đang tạo...' : 'Tạo dữ liệu mẫu'}
             </button>
           </div>
         </div>
@@ -265,7 +316,7 @@ export default function DatabaseAdminPage() {
         {/* Quick Actions */}
         <div className="mt-8 bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Quy trình đề xuất
+            Quy trình khuyến nghị
           </h3>
           <div className="space-y-3 text-sm text-gray-600">
             <div className="flex items-start">
@@ -281,7 +332,7 @@ export default function DatabaseAdminPage() {
                 2
               </div>
               <div>
-                <strong>Xóa database</strong> nếu muốn bắt đầu lại từ đầu
+                <strong>Xóa database</strong> nếu muốn bắt đầu lại từ đầu (tùy chọn)
               </div>
             </div>
             <div className="flex items-start">
@@ -289,7 +340,7 @@ export default function DatabaseAdminPage() {
                 3
               </div>
               <div>
-                <strong>Tạo thể loại mẫu</strong> để có sẵn 35+ thể loại phổ biến
+                <strong>Tạo dữ liệu mẫu</strong> để có sẵn 5 thể loại + 3 truyện với chương (Khuyến nghị!)
               </div>
             </div>
             <div className="flex items-start">
@@ -297,7 +348,15 @@ export default function DatabaseAdminPage() {
                 4
               </div>
               <div>
-                Vào <Link href="/admin" className="text-blue-600 hover:underline">trang admin chính</Link> để thêm truyện
+                Hoặc <strong>Tạo thể loại mẫu</strong> để có 50 thể loại phong phú (nếu muốn tự thêm truyện)
+              </div>
+            </div>
+            <div className="flex items-start">
+              <div className="bg-blue-100 text-blue-800 rounded-full w-6 h-6 flex items-center justify-center text-xs font-semibold mr-3 mt-0.5">
+                5
+              </div>
+              <div>
+                Vào <Link href="/test-reader" className="text-blue-600 hover:underline">Test Reader</Link> để kiểm tra đọc truyện
               </div>
             </div>
           </div>
